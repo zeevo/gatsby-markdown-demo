@@ -13,9 +13,15 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-wordpress-experimental`,
+      options: {
+        // the only required plugin option for WordPress is the GraphQL url.
+        url: "http://54.175.18.204/graphql",
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
     },
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,6 +29,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
