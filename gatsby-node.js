@@ -7,13 +7,12 @@ module.exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      allMarkdownRemark {
+      allWpPost {
         edges {
           node {
-            frontmatter {
-              title
-              slug
-            }
+            id
+            content
+            slug
           }
         }
       }
@@ -23,12 +22,12 @@ module.exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    result.data.allWpPost.edges.forEach(({ node }) => {
       createPage({
-        path: node.frontmatter.slug,
+        path: node.slug,
         component: postTemplate,
         context: {
-          slug: node.frontmatter.slug,
+          slug: node.slug,
         },
       })
     })

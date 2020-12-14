@@ -3,10 +3,12 @@ import React from "react"
 import Layout from "../components/layout"
 
 function Article(props) {
-  const article = props.data.allMarkdownRemark.edges[0].node
+  const article = props.data.wpPost
+  console.log(props)
   return (
     <Layout>
-      <div dangerouslySetInnerHTML={{ __html: article.html }}></div>
+      <h1>{article.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: article.content }}></div>
     </Layout>
   )
 }
@@ -15,16 +17,9 @@ export default Article
 
 export const query = graphql`
   query MyQuery($slug: String!) {
-    allMarkdownRemark(filter: { frontmatter: { slug: { eq: $slug } } }) {
-      edges {
-        node {
-          frontmatter {
-            slug
-            title
-          }
-          html
-        }
-      }
+    wpPost(slug: { eq: $slug }) {
+      title
+      content
     }
   }
 `
